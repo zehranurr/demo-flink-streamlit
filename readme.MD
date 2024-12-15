@@ -13,27 +13,25 @@
 
 # Create topic 
 ## Enter kafka container then create those 2 topics
-
+- docker exec -it id /bin/bash 
 - kafka-topics --create --topic SPY --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 - kafka-topics --create --topic SPY_AVG  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 
 ## to be sure topics created run this 
 - kafka-topics --list --bootstrap-server localhost:9092
 
-docker exec -it 3d5aafc2431a bash
-docker exec -it 3d5aafc2431a kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY_AVG --from-beginning
-kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY --from-beginning
+## to listen topics
+- docker exec -it id kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY_AVG --from-beginning
+- kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY --from-beginning
 
 
-docker exec -it 3d5aafc2431a kafka-topics --create --topic SPY_AVG --bootstrap-server localhost:9092 --partitions 1 
-kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY_AVG --from-beginning--replication-factor 1
-
- Flink SQL Client Kullanarak SQL Sorguları Çalıştırmak
 
 
-docker exec -it jobmanager /bin/bash
-./bin/sql-client.sh
+#  Running SQL Queries Using Flink SQL Client
+- docker exec -it jobmanager /bin/bash
+- ./bin/sql-client.sh
 
+# To create this table 
 
 flink : DROP TABLE kafka_sink;
 
@@ -64,40 +62,42 @@ Sending data for SPY: symbol='SPY' timestamp=datetime.datetime(2024, 12, 13, 17,
 Message delivered to SPY [0]
 
 streamlit run app.py
-
+## First Table 
 CREATE TABLE kafka_source (
->     symbol STRING,
->     price DOUBLE,
->     proctime AS PROCTIME()  -- Verinin geldiği zamanı gösteren sütun        
-> ) WITH (
->     'connector' = 'kafka',
->     'topic' = 'SPY',
->     'properties.bootstrap.servers' = 'kafka:29092',
->     'properties.group.id' = 'consumer_of_stocks',  -- group.id ekleniyor    
->     'format' = 'json',
->     'scan.startup.mode'= 'earliest-offset',
->     'json.timestamp-format.standard' = 'ISO-8601'
-> );
+        symbol STRING,
+        price DOUBLE,
+        proctime AS PROCTIME()  -- Verinin geldiği zamanı gösteren sütun        
+    ) WITH (
+        'connector' = 'kafka',
+        'topic' = 'SPY',
+        'properties.bootstrap.servers' = 'kafka:29092',
+        'properties.group.id' = 'consumer_of_stocks',  -- group.id ekleniyor    
+        'format' = 'json',
+        'scan.startup.mode'= 'earliest-offset',
+        'json.timestamp-format.standard' = 'ISO-8601'
+    );
 
-
+## Second Table 
 CREATE TABLE kafka_sink (
->     symbol STRING,
->     window_start TIMESTAMP(3),
->     window_end TIMESTAMP(3),
->     avg_price DOUBLE
-> ) WITH (
->     'connector' = 'kafka',
->     'topic' = 'SPY_AVG',
->     'properties.bootstrap.servers' = 'kafka:29092',
->     'properties.group.id' = 'consumer_of_stocks',  -- group.id ekleniyor    
->     'format' = 'json',
->     'json.timestamp-format.standard' = 'ISO-8601'
-> );
- INSERT INTO kafka_sink
-> SELECT
->     symbol,
->     TUMBLE_START(proctime, INTERVAL '5' SECOND) AS window_start,
->     TUMBLE_END(proctime, INTERVAL '5' SECOND) AS window_end,
->     AVG(price) AS avg_price
-> FROM kafka_source
-> GROUP BY symbol, TUMBLE(proctime, INTERVAL '5' SECOND);
+     symbol STRING,
+     window_start TIMESTAMP(3),
+     window_end TIMESTAMP(3),
+     avg_price DOUBLE
+ ) WITH (
+     'connector' = 'kafka',
+     'topic' = 'SPY_AVG',
+     'properties.bootstrap.servers' = 'kafka:29092',
+     'properties.group.id' = 'consumer_of_stocks',  -- group.id ekleniyor    
+     'format' = 'json',
+     'json.timestamp-format.standard' = 'ISO-8601'
+ );
+
+##
+INSERT INTO kafka_sink
+SELECT
+        symbol,
+        TUMBLE_START(proctime, INTERVAL '5' SECOND) AS window_start,
+        TUMBLE_END(proctime, INTERVAL '5' SECOND) AS window_end,
+        AVG(price) AS avg_price
+    FROM kafka_source
+    GROUP BY symbol, TUMBLE(proctime, INTERVAL '5' SECOND);
