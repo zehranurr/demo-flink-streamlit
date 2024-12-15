@@ -1,18 +1,18 @@
 
-## TO  copy jar
-# Firstly copy to jobmanager
+# To  copy jar
+## Firstly copy to jobmanager
 -  docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" jobmanager:/opt/flink/lib/
-# Then restart jobmanager container 
+## Then restart jobmanager container 
 - docker restart ID(jobmanager)
-# Second copy to taskmanager
+## Second copy to taskmanager
 - docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
-# Then restart taskmanager container 
+## Then restart taskmanager container 
 - docker restart id
 
 
 
-## Create topic 
-# Enter kafka container then create those 2 topics
+# Create topic 
+## Enter kafka container then create those 2 topics
 
 - kafka-topics --create --topic SPY --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 - kafka-topics --create --topic SPY_AVG  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
