@@ -1,23 +1,24 @@
 
-copy jar docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" jobmanager:/opt/flink/lib/
-docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
+## TO  copy jar
+# Firstly copy to jobmanager
+-  docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" jobmanager:/opt/flink/lib/
+# Then restart jobmanager container 
+- docker restart ID(jobmanager)
+# Second copy to taskmanager
+- docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
+# Then restart taskmanager container 
+- docker restart id
 
-docker restart id
-
-docker restart 
-
-docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" 2da40033ce33:/opt/flink/lib/
-docker restart c9c545d8ab4c
-docker restart 5eecb9efc103a78861af80f460d74c68ac5808fbc432c0170995f359bea61b17
 
 
-docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" a45cd5868a0e6947ed33d2b1ff9f59dda93dd8c613cabfe87f96c65fc1dcb026:/opt/flink/lib/
+## Create topic 
+# Enter kafka container then create those 2 topics
 
-create topic 
-kafka-topics --create --topic SPY --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
-kafka-topics --create --topic SPY_AVG  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+- kafka-topics --create --topic SPY --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+- kafka-topics --create --topic SPY_AVG  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 
-kafka-topics --list --bootstrap-server localhost:9092
+## to be sure topics created run this 
+- kafka-topics --list --bootstrap-server localhost:9092
 
 docker exec -it 3d5aafc2431a bash
 docker exec -it 3d5aafc2431a kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY_AVG --from-beginning
