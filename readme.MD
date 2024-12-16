@@ -25,9 +25,11 @@ docker-compose up --build
 ## Then restart taskmanager container 
 - docker restart id
 ```
+```
+
 ![alt text](images/image-1.png)
 
-```
+
 
 
 docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
