@@ -26,7 +26,7 @@ docker-compose up --build
 - docker restart id
 ```
 ```
-![Alt text](images/image-1.png)
+![Alt text](C:\Kafka-Team\flink_depo\images\image-1.png)
 * loading
 
 
