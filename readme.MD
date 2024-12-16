@@ -157,13 +157,6 @@ SELECT
 
 # To run Streamlit
 ```
-
-
-
-
-
-
-
  streamlit run app.py
 
 ```
