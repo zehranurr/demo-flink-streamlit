@@ -31,8 +31,8 @@ docker-compose up --build
 ## Then restart taskmanager container 
 - docker restart id
 
-
-![alt text](images/image-1.png)
+![alt text](images/image1.png)
+* 
 
 
 # Create topic 
@@ -54,6 +54,8 @@ docker-compose up --build
 #  Running SQL Queries Using Flink SQL Client
 - docker exec -it jobmanager /bin/bash
 - ./bin/sql-client.sh
+
+
 
 # To create this table 
 
@@ -128,3 +130,11 @@ SELECT
  streamlit run app.py
 
 ```
+
+
+![alt text](images/image2.png)
+* When we run first time 
+
+
+![alt text](images/image3.png)
+* after time it will look like 
