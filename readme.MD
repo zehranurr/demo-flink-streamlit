@@ -116,7 +116,7 @@ CREATE TABLE kafka_source (
 
 ```
 ![alt text](images/image8.png)
-* chech table 
+* check table 
 ![alt text](images/image7.png)
 ```
 ## Second Table 
