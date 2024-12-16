@@ -26,9 +26,8 @@ docker-compose up --build
 - docker restart id
 ```
 ```
-
-![alt text](images/image-1.png)
-
+![Alt text](images/image-1.png)
+* loading
 
 
 
