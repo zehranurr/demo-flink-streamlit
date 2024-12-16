@@ -1,5 +1,15 @@
  ![](images/image10.png)
 
+# How to use FlinkSQL with Kafka, Streamlit, and the Alpaca API
+
+
+Learn how to use these 4 technologies together by running this demo yourself! 
+
+In this project you'll produce stock trade events from the [Alpaca API markets](https://app.alpaca.markets) websocket to an [Apache Kafka](https://kafka.apache.org/) topic located in your local computer From there, use [FlinkSQL](https://nightlies.apache.org/flink/flink-docs-master/docs/dev/table/sql/overview/) in  local  to generate 5 sec averages of stock prices over a tumbling window. Then, you'll consume the averages from a backup Kafka topic and display them using [Streamlit](https://streamlit.io/). 
+
+<img width="718" alt="graph of the 4 technologies" src="https://github.com/Cerchie/alpaca-kafka-flink-streamlit/assets/54046179/7600d717-69bc-46c5-8679-d8d65b9ce810">
+
+Note: Although it may change in the future, at the time this README was written, the NYSE is open from 9:30 to 4 EST. If you run this application outside of those hours, you may not see data coming through.
 
 
 
