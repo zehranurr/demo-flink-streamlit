@@ -1,19 +1,40 @@
+# To clone this repo 
+```
+git clone https://github.com/zehranurr/demo-flink-streamlit.git
+
+
+```
+# install library 
+```
+pip install requirements.txt
+
+```
+# Run docker-compose
+```
+docker-compose up --build
+
+```
 
 # To  copy jar
 ## Firstly copy to jobmanager
--  docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" jobmanager:/opt/flink/lib/
+-  docker cp "flink-sql-connector-kafka-3.3.0-1.20.jar" jobmanager:/opt/flink/lib/
 ## Then restart jobmanager container 
 - docker restart ID(jobmanager)
 ## Second copy to taskmanager
-- docker cp "path\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
+- docker cp "flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 ## Then restart taskmanager container 
 - docker restart id
+![alt text](images/image-1.png)
+
+* Inventory decreased 1!
+
+![alt text](images/image-3.png)
 
 docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 
 # Create topic 
 ## Enter kafka container then create those 2 topics
-- docker exec -it id /bin/bash 
+- docker exec -it kafka /bin/bash 
 - kafka-topics --create --topic SPY --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 - kafka-topics --create --topic SPY_AVG  --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 
@@ -96,5 +117,11 @@ SELECT
     FROM kafka_source
     GROUP BY symbol, TUMBLE(proctime, INTERVAL '5' SECOND);
 
-    streamlit run app.py
+   
+```
+```
+# To run Streamlit
+
+ streamlit run app.py
+
 ```
