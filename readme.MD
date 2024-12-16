@@ -9,7 +9,7 @@
 ## Then restart taskmanager container 
 - docker restart id
 
-
+docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 
 # Create topic 
 ## Enter kafka container then create those 2 topics
@@ -35,6 +35,8 @@
 
 flink : DROP TABLE kafka_sink;
 
+```
+
 CREATE TABLE kafka_source (
     symbol STRING,
     price DOUBLE,
@@ -49,19 +51,8 @@ CREATE TABLE kafka_source (
     'json.timestamp-format.standard' = 'ISO-8601'
 );
 
-
-
-
-
-
-
-
-
-
-Sending data for SPY: symbol='SPY' timestamp=datetime.datetime(2024, 12, 13, 17, 4, 7, 544554, tzinfo=datetime.timezone.utc) ask_exchange='V' ask_price=603.78 ask_size=1.0 bid_exchange='V' bid_price=603.52 bid_size=1.0 conditions=['R'] tape='B'
-Message delivered to SPY [0]
-
-streamlit run app.py
+```
+```
 ## First Table 
 CREATE TABLE kafka_source (
         symbol STRING,
@@ -77,6 +68,8 @@ CREATE TABLE kafka_source (
         'json.timestamp-format.standard' = 'ISO-8601'
     );
 
+```
+```
 ## Second Table 
 CREATE TABLE kafka_sink (
      symbol STRING,
@@ -91,8 +84,9 @@ CREATE TABLE kafka_sink (
      'format' = 'json',
      'json.timestamp-format.standard' = 'ISO-8601'
  );
-
-##
+```
+```
+## Connection
 INSERT INTO kafka_sink
 SELECT
         symbol,
@@ -101,3 +95,6 @@ SELECT
         AVG(price) AS avg_price
     FROM kafka_source
     GROUP BY symbol, TUMBLE(proctime, INTERVAL '5' SECOND);
+
+    streamlit run app.py
+```
