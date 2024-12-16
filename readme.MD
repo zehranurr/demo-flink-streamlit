@@ -49,6 +49,15 @@ docker-compose up --build
 - kafka-console-consumer --bootstrap-server localhost:9092 --topic SPY --from-beginning
 
 
+# Run kafka producer
+```
+python kafkaproducer.py 
+
+```
+![alt text](images/image9.png)
+
+
+
 
 
 #  Running SQL Queries Using Flink SQL Client
@@ -78,6 +87,7 @@ CREATE TABLE kafka_source (
 );
 
 ```
+
 ```
 ## First Table 
 CREATE TABLE kafka_source (
@@ -95,6 +105,9 @@ CREATE TABLE kafka_source (
     );
 
 ```
+![alt text](images/image8.png)
+* chech table 
+![alt text](images/image7.png)
 ```
 ## Second Table 
 CREATE TABLE kafka_sink (
@@ -111,6 +124,7 @@ CREATE TABLE kafka_sink (
      'json.timestamp-format.standard' = 'ISO-8601'
  );
 ```
+![alt text](images/image6.png)
 ```
 ## Connection
 INSERT INTO kafka_sink
@@ -124,8 +138,21 @@ SELECT
 
    
 ```
-```
+![alt text](images/image5.png)
+
+## We can look Apache flink dashbord on local localhost:8081
+![alt text](images/image4.png)
+
+
+
 # To run Streamlit
+```
+
+
+
+
+
+
 
  streamlit run app.py
 
