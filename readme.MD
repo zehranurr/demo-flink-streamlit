@@ -26,13 +26,8 @@ docker-compose up --build
 - docker restart id
 
 
-![Alt text](C:/Kafka-Team/flink_depo/images/image-1.png)
-* loading
-<img src="C:\Kafka-Team\flink_depo\images\image-1.png" width="300" />
-![Alt text](C\images\image-1.png)
+![alt text](images/image-1.png)
 
-
-docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 
 # Create topic 
 ## Enter kafka container then create those 2 topics
