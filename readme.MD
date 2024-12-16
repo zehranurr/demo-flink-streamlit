@@ -1,16 +1,16 @@
- ![alt text](images/image10.png)
+ ![](images/image10.png)
 
 
 
 
-![alt text](images\image10.png)
+![](images\image10.png)
 
 
 
-![alt text](images\image10.png)
+![](images\image10.png)
 
 
-![alt text]('C:\Kafka-Team\flink_depo\images\image10.png')
+![]('C:\Kafka-Team\flink_depo\images\image10.png')
 
 
 
