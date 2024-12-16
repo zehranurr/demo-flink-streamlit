@@ -24,11 +24,11 @@ docker-compose up --build
 - docker cp "flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 ## Then restart taskmanager container 
 - docker restart id
+```
 ![alt text](images/image-1.png)
 
-* Inventory decreased 1!
+```
 
-![alt text](images/image-3.png)
 
 docker cp "C:\Kafka-Team\flink_depo\flink-sql-connector-kafka-3.3.0-1.20.jar" taskmanager:/opt/flink/lib/
 
